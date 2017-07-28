@@ -34,7 +34,7 @@ public class Main
                 case "show stok":
                     mainController.showStok();
                     break;
-                case "add flowers to stok":
+                case "add flowers":
                     mainController.addFlowersToStok(in);
 
             }
