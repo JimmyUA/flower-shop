@@ -59,7 +59,11 @@ public class ConsolePrinter {
 
     }
 
-    public void askFlowerType() {
+    public void askFlowerTypeAndColor() {
         System.out.println("What flower type do you want to create?\nPossible vriants are:\n");
+    }
+
+    public void notifySavingFlowerToStok(Flower flower) {
+        System.out.println(flower.toString() + " were put to stok");
     }
 }
