@@ -41,11 +41,14 @@ public class MainController {
     }
 
     public void addFlowersToStok(Scanner scanner) throws IllegalArgumentException{
-        consolePrinter.askFlowerClass();
-        String requiredFlowerClass = scanner.nextLine();
-        choseFactoryType(requiredFlowerClass, scanner);
-
-
+        do {
+            consolePrinter.askFlowerClass();
+            String requiredFlowerClass = scanner.nextLine();
+            if(requiredFlowerClass.equalsIgnoreCase("stop")){
+                return;
+            }
+            choseFactoryType(requiredFlowerClass, scanner);
+        }while (true);
     }
 
     private void choseFactoryType(String requiredFlowerClass, Scanner scanner) {
@@ -67,12 +70,18 @@ public class MainController {
         consolePrinter.notifySavingFlowerToStok(flower);
     }
 
-    private WildFlower choseWildFlowerType(FlowerFactory factory, Scanner scanner) {
+    private WildFlower choseWildFlowerType(FlowerFactory factory, Scanner scanner) { //TODO resolve problem when no color entered
         consolePrinter.askFlowerTypeAndColor();
         String requiredFlowerTypeAndColor = scanner.nextLine();
         String[] typeAndColor = requiredFlowerTypeAndColor.split(" ");
+        String requiredColor;
+        if (typeAndColor.length > 1){
+            requiredColor = typeAndColor[1];}
+            else {
+            requiredColor = "white";
+        }
         String requiredFlowerType = typeAndColor[0];
-        String requiredColor = typeAndColor[1];
+
         return (WildFlower) factory.createFlower(requiredFlowerType, requiredColor);
     }
 
@@ -80,8 +89,13 @@ public class MainController {
         consolePrinter.askFlowerTypeAndColor();
         String requiredFlowerTypeAndColor = scanner.nextLine();
         String[] typeAndColor = requiredFlowerTypeAndColor.split(" ");
+        String requiredColor;
+        if (typeAndColor.length > 1){
+            requiredColor = typeAndColor[1];}
+        else {
+            requiredColor = "white";
+        }
         String requiredFlowerType = typeAndColor[0];
-        String requiredColor = typeAndColor[1];
         return (DecorativeFlower) factory.createFlower(requiredFlowerType, requiredColor);
     }
 
