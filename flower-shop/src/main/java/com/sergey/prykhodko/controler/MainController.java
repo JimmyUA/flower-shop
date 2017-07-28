@@ -64,6 +64,7 @@ public class MainController {
                 flowerFactory = new DecorativeFlowerFactory();
                 flower = choseDecorativelowerType(flowerFactory, scanner);
                 stokManager.putFlowerToStok(flower);
+                break;
                 default:
                     throw new IllegalArgumentException("No such flower class");
         }
