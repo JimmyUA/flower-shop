@@ -53,4 +53,13 @@ public class ConsolePrinter {
 
         System.out.println(stokRepresantation);
     }
+
+    public void askFlowerClass() {
+        System.out.println("What flower do you want to create?\nPossible vriants are:\n");   //"- rose\n- lilly\n- tulip\nchrisanthemum\n-"
+
+    }
+
+    public void askFlowerType() {
+        System.out.println("What flower type do you want to create?\nPossible vriants are:\n");
+    }
 }

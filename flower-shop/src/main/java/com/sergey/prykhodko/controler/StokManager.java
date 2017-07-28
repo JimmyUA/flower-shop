@@ -7,16 +7,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class StokeManager {
+public class StokManager {
     private StokFeatFileWorker worker;
     protected Stok stok;
     private File stokStorage;
 
 
-    public StokeManager(StokFeatFileWorker worker) {
+    public StokManager(StokFeatFileWorker worker) throws FileNotFoundException {
         this.worker = worker;
-
         stokStorage = new File("stok.xml");
+        recreateStoredStok();
+    }
+
+    public StokManager(StokFeatFileWorker worker, Stok stok) {
+        this.worker = worker;
+        stokStorage = new File("stok.xml");
+        this.stok = stok;
     }
 
     public void storeStok() throws IOException {
@@ -36,5 +42,9 @@ public class StokeManager {
 
     public void setEmptyStok() {
         stok = new Stok();
+    }
+
+    public Stok getStok() {
+        return stok;
     }
 }

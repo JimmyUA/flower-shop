@@ -1,4 +1,4 @@
-package com.sergey.prykhodko.model;
+package com.sergey.prykhodko.model.products;
 
 public abstract class Accessory {
     public int price;

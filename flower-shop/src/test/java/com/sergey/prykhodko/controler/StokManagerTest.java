@@ -10,21 +10,25 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class StokeManagerTest {
+public class StokManagerTest {
     StokFeatFileWorker workerMock = mock(StokFeatFileWorker.class);
-    StokeManager stokeManager = new StokeManager(workerMock);
+    StokManager stokManager = new StokManager(workerMock);
+
+    public StokManagerTest() throws FileNotFoundException {
+    }
 
 
     @Test
     public void methodStoreStokToFileShouldBeInvokedAfterInvokingStoreStokeMethod(){
+        stokManager.stok = new Stok();
         try {
-            stokeManager.storeStok();
+            stokManager.storeStok();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
 
         try {
-            verify(workerMock,atLeastOnce()).storeStokToFile(any(Stok.class), any(File.class));
+            verify(workerMock).storeStokToFile(any(Stok.class), any(File.class));
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
@@ -40,12 +44,12 @@ public class StokeManagerTest {
         }
 
         try {
-            stokeManager.recreateStoredStok();
+            stokManager.recreateStoredStok();
             } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        assertEquals(stokeManager.stok, etalonStok);
+        assertEquals(stokManager.stok, etalonStok);
     }
 
     @Test

@@ -1,33 +1,33 @@
 package com.sergey.prykhodko.controler;
 
+import com.sergey.prykhodko.model.stock.Stok;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.Collection;
 
 
-public class ListsFeatFileWorker {
+public class StokFeatFileWorker {
     private XStream xStream;
 
-    public ListsFeatFileWorker() {
+    public StokFeatFileWorker() {
         xStream = new XStream(new DomDriver());
     }
 
-    public void storeListToFile(List list, File file) throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(file);
-        writer.write(xStream.toXML(list));
+    public void storeStokToFile(Stok stok, File file) throws IOException {
+        xStream.toXML(stok, new FileWriter(file));
     }
 
-    public List getListFromFile(File file) throws FileNotFoundException {
-        List result = new ArrayList();
+    public Stok getStokFromFile(File file) throws FileNotFoundException {
+        Stok result = new Stok();
         FileInputStream inputStream = new FileInputStream(file);
         xStream.fromXML(inputStream, result);
         return result;
     }
+
 }

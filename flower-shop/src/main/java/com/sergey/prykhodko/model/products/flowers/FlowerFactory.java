@@ -1,4 +1,5 @@
 package com.sergey.prykhodko.model.products.flowers;
 
-public class FlowerFactory {
+public interface FlowerFactory {
+    public Flower createFlower(String type, String color);
 }
