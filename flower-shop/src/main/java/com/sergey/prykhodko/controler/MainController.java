@@ -1,9 +1,6 @@
 package com.sergey.prykhodko.controler;
 
-import com.sergey.prykhodko.model.products.flowers.DecorativeFlowerFactory;
-import com.sergey.prykhodko.model.products.flowers.Flower;
-import com.sergey.prykhodko.model.products.flowers.FlowerFactory;
-import com.sergey.prykhodko.model.products.flowers.WildFlowerFactory;
+import com.sergey.prykhodko.model.products.flowers.*;
 import com.sergey.prykhodko.model.stock.Stok;
 
 import java.io.FileNotFoundException;
@@ -46,28 +43,46 @@ public class MainController {
     public void addFlowersToStok(Scanner scanner) throws IllegalArgumentException{
         consolePrinter.askFlowerClass();
         String requiredFlowerClass = scanner.nextLine();
-        FlowerFactory flowerFactory = choseFactoryType(requiredFlowerClass);
-        consolePrinter.askFlowerType();
-        String requiredFlowerType = scanner.nextLine();
-        Flower flower = choseFlowerType(requiredFlowerType);
+        choseFactoryType(requiredFlowerClass, scanner);
+
 
     }
 
-    private FlowerFactory choseFactoryType(String requiredFlowerClass) {
+    private void choseFactoryType(String requiredFlowerClass, Scanner scanner) {
         FlowerFactory flowerFactory;
+        Flower flower;
         switch (requiredFlowerClass.toLowerCase()){
             case "wild":
                 flowerFactory = new WildFlowerFactory();
+                flower = choseWildFlowerType(flowerFactory, scanner);
+                stokManager.putFlowerToStok(flower);
                 break;
             case "decorative":
                 flowerFactory = new DecorativeFlowerFactory();
+                flower = choseDecorativelowerType(flowerFactory, scanner);
+                stokManager.putFlowerToStok(flower);
                 default:
                     throw new IllegalArgumentException("No such flower class");
         }
-        return flowerFactory;
+        consolePrinter.notifySavingFlowerToStok(flower);
     }
 
-    private Flower choseFlowerType(String requiredFlowerType) {
+    private WildFlower choseWildFlowerType(FlowerFactory factory, Scanner scanner) {
+        consolePrinter.askFlowerTypeAndColor();
+        String requiredFlowerTypeAndColor = scanner.nextLine();
+        String[] typeAndColor = requiredFlowerTypeAndColor.split(" ");
+        String requiredFlowerType = typeAndColor[0];
+        String requiredColor = typeAndColor[1];
+        return (WildFlower) factory.createFlower(requiredFlowerType, requiredColor);
+    }
+
+    private DecorativeFlower choseDecorativelowerType(FlowerFactory factory, Scanner scanner) {
+        consolePrinter.askFlowerTypeAndColor();
+        String requiredFlowerTypeAndColor = scanner.nextLine();
+        String[] typeAndColor = requiredFlowerTypeAndColor.split(" ");
+        String requiredFlowerType = typeAndColor[0];
+        String requiredColor = typeAndColor[1];
+        return (DecorativeFlower) factory.createFlower(requiredFlowerType, requiredColor);
     }
 
 
