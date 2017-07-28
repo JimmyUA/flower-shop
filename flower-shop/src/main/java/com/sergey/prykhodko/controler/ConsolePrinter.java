@@ -64,6 +64,6 @@ public class ConsolePrinter {
     }
 
     public void notifySavingFlowerToStok(Flower flower) {
-        System.out.println(flower.toString() + " were put to stok");
+        System.out.println(flower.toString() + " were put to stok\n");
     }
 }
