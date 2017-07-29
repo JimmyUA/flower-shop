@@ -21,7 +21,7 @@ public class ConsolePrinter {
         stokRepresantation.append("///////////////////////////////////FLOWERS//////////////////////////////////\n");
         List<Flower> flowers = stok.getFlowers();
         if (flowers.isEmpty()){
-            stokRepresantation.append("                               EMPTY                                     \n");
+            stokRepresantation.append("                                    EMPTY                                     \n");
         }
         else {
             for (Flower flower : stok.getFlowers()
@@ -29,9 +29,10 @@ public class ConsolePrinter {
                 stokRepresantation.append(flower.toString() + "\n");
             }
         }
+        stokRepresantation.append("///////////////////////////////////BOUQUETS//////////////////////////////////\n");
         List<Bouquet> bouquets = stok.getBouquets();
         if(bouquets.isEmpty()){
-            stokRepresantation.append("                               EMPTY                                     \n");
+            stokRepresantation.append("                                    EMPTY                                     \n");
         }
         else {
             for (Bouquet bouquet : bouquets
@@ -39,9 +40,10 @@ public class ConsolePrinter {
                 stokRepresantation.append(bouquet.toString() + "\n");
             }
         }
+        stokRepresantation.append("///////////////////////////////////ACCESSORIES//////////////////////////////////\n");
         List<Accessory> accessories = stok.getAccessories();
         if(accessories.isEmpty()){
-            stokRepresantation.append("                               EMPTY                                     \n");
+            stokRepresantation.append("                                    EMPTY                                     \n");
         }
         else {
             for (Accessory accessory : stok.getAccessories()

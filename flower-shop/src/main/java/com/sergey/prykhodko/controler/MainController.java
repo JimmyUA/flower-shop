@@ -71,7 +71,7 @@ public class MainController {
         consolePrinter.notifySavingFlowerToStok(flower);
     }
 
-    private WildFlower choseWildFlowerType(FlowerFactory factory, Scanner scanner) { //TODO resolve problem when no color entered
+    private WildFlower choseWildFlowerType(FlowerFactory factory, Scanner scanner) {
         consolePrinter.askFlowerTypeAndColor();
         String requiredFlowerTypeAndColor = scanner.nextLine();
         String[] typeAndColor = requiredFlowerTypeAndColor.split(" ");
