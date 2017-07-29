@@ -1,6 +1,6 @@
 package com.sergey.prykhodko.controler;
 
-import com.sergey.prykhodko.model.stock.Stok;
+import com.sergey.prykhodko.model.stock.Stock;
 import org.junit.Test;
 
 import java.io.File;
@@ -10,25 +10,25 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class StokManagerTest {
-    StokFeatFileWorker workerMock = mock(StokFeatFileWorker.class);
-    StokManager stokManager = new StokManager(workerMock);
+public class StockManagerTest {
+    StockFeatFileWorker workerMock = mock(StockFeatFileWorker.class);
+    StockManager stockManager = new StockManager(workerMock);
 
-    public StokManagerTest() throws FileNotFoundException {
+    public StockManagerTest() throws FileNotFoundException {
     }
 
 
     @Test
     public void methodStoreStokToFileShouldBeInvokedAfterInvokingStoreStokeMethod(){
-        stokManager.stok = new Stok();
+        stockManager.stock = new Stock();
         try {
-            stokManager.storeStok();
+            stockManager.storeStock();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
 
         try {
-            verify(workerMock).storeStokToFile(any(Stok.class), any(File.class));
+            verify(workerMock).storeStockToFile(any(Stock.class), any(File.class));
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
@@ -36,20 +36,20 @@ public class StokManagerTest {
 
     @Test
     public void methodGetStokFromFileShouldBeInvokedAfterInvokingRecreateStoredStok(){
-        Stok etalonStok = new Stok();
+        Stock etalonStock = new Stock();
         try {
-            when(workerMock.getStokFromFile(any(File.class))).thenReturn(etalonStok);
+            when(workerMock.getStockFromFile(any(File.class))).thenReturn(etalonStock);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
-            stokManager.recreateStoredStok();
+            stockManager.recreateStoredStock();
             } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        assertEquals(stokManager.stok, etalonStok);
+        assertEquals(stockManager.stock, etalonStock);
     }
 
     @Test

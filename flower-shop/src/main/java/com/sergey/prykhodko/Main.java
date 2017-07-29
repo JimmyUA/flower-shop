@@ -1,7 +1,7 @@
 package com.sergey.prykhodko;
 
 import com.sergey.prykhodko.controler.MainController;
-import com.sergey.prykhodko.model.stock.Stok;
+import com.sergey.prykhodko.model.stock.Stock;
 import com.sergey.prykhodko.controler.ConsolePrinter;
 
 import java.io.FileNotFoundException;
@@ -20,9 +20,9 @@ public class Main
         try {
             mainController = new MainController();
         } catch (FileNotFoundException e) {
-            System.out.println("Can't find stored stok, programm will be continued with empty stok");
+            System.out.println("Can't find stored stock, programm will be continued with empty stock");
         }
-        mainController = new MainController(new Stok());
+        mainController = new MainController(new Stock());
         ConsolePrinter printer = new ConsolePrinter();
         Scanner in = new Scanner(System.in);
         String command;
@@ -31,21 +31,21 @@ public class Main
             switch (command.toLowerCase()){
                 case "exit":
                     break;
-                case "show stok":
-                    mainController.showStok();
+                case "show stock":
+                    mainController.showStock();
                     break;
                 case "add flowers":
-                    mainController.addFlowersToStok(in);
+                    mainController.addFlowersToStock(in);
 
             }
         }while (!command.equalsIgnoreCase("exit"));
         try {
-            mainController.saveStokToFile();
+            mainController.saveStockToFile();
         } catch (IOException e) {
             System.out.println("Can't save changes!");
             return;
         }
-        mainController.notifySavingStokToFile();
+        mainController.notifySavingStockToFile();
 
     }
 }

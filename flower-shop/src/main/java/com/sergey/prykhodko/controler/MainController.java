@@ -1,46 +1,46 @@
 package com.sergey.prykhodko.controler;
 
 import com.sergey.prykhodko.model.products.flowers.*;
-import com.sergey.prykhodko.model.stock.Stok;
+import com.sergey.prykhodko.model.stock.Stock;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class MainController {
-    private StokManager stokManager;
+    private StockManager stockManager;
     private ConsolePrinter consolePrinter;
 
     public MainController() throws FileNotFoundException {
-        StokFeatFileWorker stokFeatFileWorker = new StokFeatFileWorker();
-        stokManager = new StokManager(stokFeatFileWorker);
+        StockFeatFileWorker stockFeatFileWorker = new StockFeatFileWorker();
+        stockManager = new StockManager(stockFeatFileWorker);
         consolePrinter = new ConsolePrinter();
     }
 
-    public MainController(Stok stok) {
-        StokFeatFileWorker stokFeatFileWorker = new StokFeatFileWorker();
-        stokManager = new StokManager(stokFeatFileWorker, stok);
+    public MainController(Stock stock) {
+        StockFeatFileWorker stockFeatFileWorker = new StockFeatFileWorker();
+        stockManager = new StockManager(stockFeatFileWorker, stock);
         consolePrinter = new ConsolePrinter();
     }
 
-    public void saveStokToFile() throws IOException {
-        stokManager.storeStok();
+    public void saveStockToFile() throws IOException {
+        stockManager.storeStock();
     }
 
-    public void setEmptyStok() {
-        stokManager.setEmptyStok();
+    public void setEmptyStock() {
+        stockManager.setEmptyStock();
     }
 
-    public void showStok(){
-        Stok stok = stokManager.getStok();
-        consolePrinter.showStok(stok);
+    public void showStock(){
+        Stock stock = stockManager.getStock();
+        consolePrinter.showStock(stock);
     }
 
-    public void notifySavingStokToFile(){
-        consolePrinter.notifySavingStokToFile();
+    public void notifySavingStockToFile(){
+        consolePrinter.notifySavingStockToFile();
     }
 
-    public void addFlowersToStok(Scanner scanner) throws IllegalArgumentException{
+    public void addFlowersToStock(Scanner scanner) throws IllegalArgumentException{
         do {
             consolePrinter.askFlowerClass();
             String requiredFlowerClass = scanner.nextLine();
@@ -58,17 +58,17 @@ public class MainController {
             case "wild":
                 flowerFactory = new WildFlowerFactory();
                 flower = choseWildFlowerType(flowerFactory, scanner);
-                stokManager.putFlowerToStok(flower);
+                stockManager.putFlowerToStock(flower);
                 break;
             case "decorative":
                 flowerFactory = new DecorativeFlowerFactory();
                 flower = choseDecorativelowerType(flowerFactory, scanner);
-                stokManager.putFlowerToStok(flower);
+                stockManager.putFlowerToStock(flower);
                 break;
                 default:
                     throw new IllegalArgumentException("No such flower class");
         }
-        consolePrinter.notifySavingFlowerToStok(flower);
+        consolePrinter.notifySavingFlowerToStock(flower);
     }
 
     private WildFlower choseWildFlowerType(FlowerFactory factory, Scanner scanner) {

@@ -7,12 +7,12 @@ import com.sergey.prykhodko.model.products.flowers.Flower;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stok {
+public class Stock {
     private List<Flower> flowers;
     private List<Bouquet> bouquets;
     private List<Accessory> accessories;
 
-    public Stok() {
+    public Stock() {
         flowers = new ArrayList<Flower>();
         bouquets = new ArrayList<Bouquet>();
         accessories = new ArrayList<Accessory>();
