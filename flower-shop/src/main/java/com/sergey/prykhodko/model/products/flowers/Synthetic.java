@@ -1,4 +1,4 @@
-package com.sergey.prykhodko.model.products;
+package com.sergey.prykhodko.model.products.flowers;
 
 public interface Synthetic {
 }

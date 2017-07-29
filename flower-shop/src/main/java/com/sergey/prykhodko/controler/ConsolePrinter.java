@@ -3,7 +3,7 @@ package com.sergey.prykhodko.controler;
 import com.sergey.prykhodko.model.products.Accessory;
 import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.flowers.Flower;
-import com.sergey.prykhodko.model.stock.Stok;
+import com.sergey.prykhodko.model.stock.Stock;
 
 import java.util.List;
 
@@ -12,45 +12,60 @@ public class ConsolePrinter {
 
     }
 
-    public void notifySavingStokToFile() {
-        System.out.println("Stok state was stored!");
+    public void notifySavingStockToFile() {
+        System.out.println("Stock state was stored!");
     }
 
-    public void showStok(Stok stok) {
-        StringBuilder stokRepresantation = new StringBuilder();
-        stokRepresantation.append("///////////////////////////////////FLOWERS//////////////////////////////////\n");
-        List<Flower> flowers = stok.getFlowers();
+    public void showStock(Stock stock) {
+        StringBuilder stockRepresantation = new StringBuilder();
+        stockRepresantation.append("///////////////////////////////////FLOWERS//////////////////////////////////\n");
+        List<Flower> flowers = stock.getFlowers();
         if (flowers.isEmpty()){
-            stokRepresantation.append("                               EMPTY                                     \n");
+            stockRepresantation.append("                                    EMPTY                                     \n");
         }
         else {
-            for (Flower flower : stok.getFlowers()
+            for (Flower flower : stock.getFlowers()
                     ) {
-                stokRepresantation.append(flower.toString() + "\n");
+                stockRepresantation.append(flower.toString() + "\n");
             }
         }
-        List<Bouquet> bouquets = stok.getBouquets();
+        stockRepresantation.append("///////////////////////////////////BOUQUETS//////////////////////////////////\n");
+        List<Bouquet> bouquets = stock.getBouquets();
         if(bouquets.isEmpty()){
-            stokRepresantation.append("                               EMPTY                                     \n");
+            stockRepresantation.append("                                    EMPTY                                     \n");
         }
         else {
             for (Bouquet bouquet : bouquets
                     ) {
-                stokRepresantation.append(bouquet.toString() + "\n");
+                stockRepresantation.append(bouquet.toString() + "\n");
             }
         }
-        List<Accessory> accessories = stok.getAccessories();
+        stockRepresantation.append("///////////////////////////////////ACCESSORIES//////////////////////////////////\n");
+        List<Accessory> accessories = stock.getAccessories();
         if(accessories.isEmpty()){
-            stokRepresantation.append("                               EMPTY                                     \n");
+            stockRepresantation.append("                                    EMPTY                                     \n");
         }
         else {
-            for (Accessory accessory : stok.getAccessories()
+            for (Accessory accessory : stock.getAccessories()
                     ) {
-                stokRepresantation.append(accessory.toString() + "\n");
+                stockRepresantation.append(accessory.toString() + "\n");
             }
         }
-        stokRepresantation.append("////////////////////////////////////////////////////////////////////////////");
+        stockRepresantation.append("////////////////////////////////////////////////////////////////////////////");
 
-        System.out.println(stokRepresantation);
+        System.out.println(stockRepresantation);
+    }
+
+    public void askFlowerClass() {
+        System.out.println("What flower do you want to create?\nPossible vriants are:\n");   //"- rose\n- lilly\n- tulip\nchrisanthemum\n-"
+
+    }
+
+    public void askFlowerTypeAndColor() {
+        System.out.println("What flower type do you want to create?\nPossible vriants are:\n");
+    }
+
+    public void notifySavingFlowerToStock(Flower flower) {
+        System.out.println(flower.toString() + " were put to stock\n");
     }
 }
