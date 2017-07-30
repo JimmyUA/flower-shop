@@ -36,8 +36,10 @@ public class Main
                     break;
                 case "add flowers":
                     mainController.addFlowersToStock(in);
+                    break;
                 case "create bouquet":
                     mainController.createBouquet(in);
+                    break;
                     
 
             }

@@ -1,5 +1,6 @@
 package com.sergey.prykhodko.controler;
 
+import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.flowers.DecorativeFlower;
 import com.sergey.prykhodko.model.products.flowers.Flower;
 import com.sergey.prykhodko.model.products.flowers.WildFlower;
@@ -79,5 +80,9 @@ public class StockManager {
         wildFlowerList.toArray(flowers);
 
         return flowers;
+    }
+
+    public void putBouquetToStok(Bouquet<? extends Flower> bouquet) {
+        stock.storeBouquet(bouquet);
     }
 }

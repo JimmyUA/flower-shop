@@ -24,6 +24,7 @@ public class MainController {
         StockFeatFileWorker stockFeatFileWorker = new StockFeatFileWorker();
         stockManager = new StockManager(stockFeatFileWorker, stock);
         consolePrinter = new ConsolePrinter();
+        bouquetManager = new BouquetManager();
     }
 
     public void saveStockToFile() throws IOException {
@@ -107,20 +108,32 @@ public class MainController {
     public void createBouquet(Scanner scanner) {
         consolePrinter.askBouquetType();
         String requiredBouquetType = scanner.nextLine();
+        choseAndCreateRequiredBouquetType(requiredBouquetType);
+    }
+
+    private void choseAndCreateRequiredBouquetType(String requiredBouquetType) {
         switch (requiredBouquetType){
             case "wild":
                 WildFlower[] wildFlowers = stockManager.getAllWildFlowersFromStok();
                 Bouquet<WildFlower> wildFlowerBouquet = bouquetManager.createNewWildFlowersBouquet(wildFlowers);
+                stockManager.putBouquetToStok(wildFlowerBouquet);
+                consolePrinter.notifySavingBouquetToStock(wildFlowerBouquet);
                 break;
             case "decorative":
                 DecorativeFlower[] decorativeFlowers = stockManager.getAllDecorativeFlowersFromStok();
-                Bouquet<DecorativeFlower> decorativeFlowerBouquet = bouquetManager.createNewDecorativeFlowersBouquet(decorativeFlowers);
+                Bouquet<DecorativeFlower> decorativeFlowerBouquet =
+                        bouquetManager.createNewDecorativeFlowersBouquet(decorativeFlowers);
+                stockManager.putBouquetToStok(decorativeFlowerBouquet);
+                consolePrinter.notifySavingBouquetToStock(decorativeFlowerBouquet);
                 break;
-
             case "mixed":
                 Flower[] flowers = stockManager.getAllFlowersFromStok();
                 Bouquet<Flower> mixedFlowerBouquet = bouquetManager.createNewMixedFlowersBouquet(flowers);
+                stockManager.putBouquetToStok(mixedFlowerBouquet);
+                consolePrinter.notifySavingBouquetToStock(mixedFlowerBouquet);
                 break;
+                default:
+                    throw new IllegalArgumentException("There is no such bouquet type");
         }
     }
 }
