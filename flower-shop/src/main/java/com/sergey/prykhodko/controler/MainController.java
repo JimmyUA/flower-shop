@@ -10,11 +10,13 @@ import java.util.Scanner;
 public class MainController {
     private StockManager stockManager;
     private ConsolePrinter consolePrinter;
+    private BouquetManager bouquetManager;
 
     public MainController() throws FileNotFoundException {
         StockFeatFileWorker stockFeatFileWorker = new StockFeatFileWorker();
         stockManager = new StockManager(stockFeatFileWorker);
         consolePrinter = new ConsolePrinter();
+        bouquetManager = new BouquetManager();
     }
 
     public MainController(Stock stock) {
@@ -47,11 +49,11 @@ public class MainController {
             if(requiredFlowerClass.equalsIgnoreCase("stop")){
                 return;
             }
-            choseFactoryType(requiredFlowerClass, scanner);
+            choseFlowerFactoryType(requiredFlowerClass, scanner);
         }while (true);
     }
 
-    private void choseFactoryType(String requiredFlowerClass, Scanner scanner) {
+    private void choseFlowerFactoryType(String requiredFlowerClass, Scanner scanner) {
         FlowerFactory flowerFactory;
         Flower flower;
         switch (requiredFlowerClass.toLowerCase()){
@@ -101,4 +103,12 @@ public class MainController {
     }
 
 
+    public void createBouquet(Scanner scanner) {
+        consolePrinter.askBouquetType();
+        String requiredBouquetType = scanner.nextLine();
+        switch (requiredBouquetType){
+            case "wild":
+                WildFlower[] wildFlowers = stockManager.getAllWildFlowersFromStok();
+        }
+    }
 }

@@ -57,15 +57,21 @@ public class ConsolePrinter {
     }
 
     public void askFlowerClass() {
-        System.out.println("What flower do you want to create?\nPossible vriants are:\n");   //"- rose\n- lilly\n- tulip\nchrisanthemum\n-"
+        System.out.println("What flower type do you want to create?\nPossible vriants are:\n" +
+                "- wild\n-decorative");   //"- rose\n- lilly\n- tulip\nchrisanthemum\n-"
 
     }
 
     public void askFlowerTypeAndColor() {
-        System.out.println("What flower type do you want to create?\nPossible vriants are:\n");
+        System.out.println("What flower do you want to create?\nPossible vriants are:\n");
     }
 
     public void notifySavingFlowerToStock(Flower flower) {
         System.out.println(flower.toString() + " were put to stock\n");
+    }
+
+    public void askBouquetType() {
+        System.out.println("What flower type do you want to create?\nPossible vriants are:\n" +
+                "- wild\n- decorative\n- mixed");
     }
 }
