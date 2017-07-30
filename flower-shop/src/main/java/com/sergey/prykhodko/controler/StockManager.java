@@ -62,4 +62,22 @@ public class StockManager {
 
         return wildFlowers;
     }
+
+    public DecorativeFlower[] getAllDecorativeFlowersFromStok() {
+        List<DecorativeFlower> decorativeFlowerList = stock.getDecorativeFlowers();
+        DecorativeFlower[] decorativeFlowers = new DecorativeFlower[decorativeFlowerList.size()];
+        decorativeFlowerList.toArray(decorativeFlowers);
+
+        return decorativeFlowers;
+    }
+
+    public Flower[] getAllFlowersFromStok() {
+        List<DecorativeFlower> decorativeFlowerList = stock.getDecorativeFlowers();
+        List<WildFlower> wildFlowerList = stock.getWildFlowers();
+        Flower[] flowers = new Flower[decorativeFlowerList.size() + wildFlowerList.size()];
+        decorativeFlowerList.toArray(flowers);
+        wildFlowerList.toArray(flowers);
+
+        return flowers;
+    }
 }

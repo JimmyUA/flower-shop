@@ -1,5 +1,6 @@
 package com.sergey.prykhodko.controler;
 
+import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.flowers.*;
 import com.sergey.prykhodko.model.stock.Stock;
 
@@ -60,12 +61,12 @@ public class MainController {
             case "wild":
                 flowerFactory = new WildFlowerFactory();
                 flower = choseWildFlowerType(flowerFactory, scanner);
-                stockManager.putFlowerToStock(flower);
+                stockManager.putWildFlowerToStock((WildFlower) flower);
                 break;
             case "decorative":
                 flowerFactory = new DecorativeFlowerFactory();
                 flower = choseDecorativelowerType(flowerFactory, scanner);
-                stockManager.putFlowerToStock(flower);
+                stockManager.putDecorativeFlowerToStock((DecorativeFlower) flower);
                 break;
                 default:
                     throw new IllegalArgumentException("No such flower class");
@@ -109,6 +110,17 @@ public class MainController {
         switch (requiredBouquetType){
             case "wild":
                 WildFlower[] wildFlowers = stockManager.getAllWildFlowersFromStok();
+                Bouquet<WildFlower> wildFlowerBouquet = bouquetManager.createNewWildFlowersBouquet(wildFlowers);
+                break;
+            case "decorative":
+                DecorativeFlower[] decorativeFlowers = stockManager.getAllDecorativeFlowersFromStok();
+                Bouquet<DecorativeFlower> decorativeFlowerBouquet = bouquetManager.createNewDecorativeFlowersBouquet(decorativeFlowers);
+                break;
+
+            case "mixed":
+                Flower[] flowers = stockManager.getAllFlowersFromStok();
+                Bouquet<Flower> mixedFlowerBouquet = bouquetManager.createNewMixedFlowersBouquet(flowers);
+                break;
         }
     }
 }
