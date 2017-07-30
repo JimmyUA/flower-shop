@@ -12,12 +12,15 @@ public class MainController {
     private StockManager stockManager;
     private ConsolePrinter consolePrinter;
     private BouquetManager bouquetManager;
+    private AccessoriesManager accessoriesManager;
 
     public MainController() throws FileNotFoundException {
         StockFeatFileWorker stockFeatFileWorker = new StockFeatFileWorker();
         stockManager = new StockManager(stockFeatFileWorker);
         consolePrinter = new ConsolePrinter();
         bouquetManager = new BouquetManager();
+        accessoriesManager = new AccessoriesManager();
+
     }
 
     public MainController(Stock stock) {
