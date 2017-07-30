@@ -1,4 +1,4 @@
 package com.sergey.prykhodko.model.products.accessories;
 
-public class TextileWrapper {
+public class TextileWrapper extends Wrapper {
 }

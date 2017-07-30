@@ -1,9 +1,8 @@
 package com.sergey.prykhodko.model.stock;
 
-import com.sergey.prykhodko.model.products.Accessory;
+import com.sergey.prykhodko.model.products.accessories.Accessory;
 import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.flowers.DecorativeFlower;
-import com.sergey.prykhodko.model.products.flowers.Flower;
 import com.sergey.prykhodko.model.products.flowers.WildFlower;
 
 import java.util.ArrayList;

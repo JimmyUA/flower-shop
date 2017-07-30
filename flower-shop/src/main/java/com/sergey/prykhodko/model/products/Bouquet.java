@@ -1,5 +1,6 @@
 package com.sergey.prykhodko.model.products;
 
+import com.sergey.prykhodko.model.products.accessories.Accessory;
 import com.sergey.prykhodko.model.products.flowers.Flower;
 
 import java.util.ArrayList;

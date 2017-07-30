@@ -1,4 +1,4 @@
 package com.sergey.prykhodko.model.products.accessories;
 
-public class CellophaneWrapper {
+public class CellophaneWrapper extends Wrapper{
 }

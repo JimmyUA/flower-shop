@@ -1,4 +1,9 @@
 package com.sergey.prykhodko.model.products.accessories;
 
-public class Wrapper {
+public abstract class Wrapper extends Accessory{
+    private int price;
+
+    public int getPrice() {
+        return this.price;
+    }
 }

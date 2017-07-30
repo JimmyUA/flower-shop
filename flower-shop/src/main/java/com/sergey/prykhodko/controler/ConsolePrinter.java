@@ -1,6 +1,6 @@
 package com.sergey.prykhodko.controler;
 
-import com.sergey.prykhodko.model.products.Accessory;
+import com.sergey.prykhodko.model.products.accessories.Accessory;
 import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.flowers.DecorativeFlower;
 import com.sergey.prykhodko.model.products.flowers.Flower;
