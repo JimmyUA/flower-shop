@@ -1,25 +1,25 @@
 package com.sergey.prykhodko.controler;
 
 import com.sergey.prykhodko.model.products.Bouquet;
+import com.sergey.prykhodko.model.products.accessories.*;
 import com.sergey.prykhodko.model.products.flowers.*;
 import com.sergey.prykhodko.model.stock.Stock;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainController {
     private StockManager stockManager;
     private ConsolePrinter consolePrinter;
     private BouquetManager bouquetManager;
-    private AccessoriesManager accessoriesManager;
 
     public MainController() throws FileNotFoundException {
         StockFeatFileWorker stockFeatFileWorker = new StockFeatFileWorker();
         stockManager = new StockManager(stockFeatFileWorker);
         consolePrinter = new ConsolePrinter();
         bouquetManager = new BouquetManager();
-        accessoriesManager = new AccessoriesManager();
 
     }
 
@@ -138,5 +138,64 @@ public class MainController {
                 default:
                     throw new IllegalArgumentException("There is no such bouquet type");
         }
+    }
+
+    public void addAccessoriesToBouquet(Scanner scanner, Bouquet bouquet) {
+        consolePrinter.askAccessoryType();
+        String requiredAccessoryType = scanner.nextLine();
+        switch (requiredAccessoryType.toLowerCase().trim()){
+            case "wrapper":
+                Wrapper wrapper = choseWrapperType(scanner);
+                bouquet.addAccessory(wrapper);
+                consolePrinter.notifyAddingAccessoryToBouquet(wrapper);
+                break;
+            case "tape":
+                Tape tape = new Tape();
+                bouquet.addAccessory(tape);
+                consolePrinter.notifyAddingAccessoryToBouquet(tape);
+                break;
+            case "bow-knot":
+                BowKnot bowKnot = new BowKnot();
+                bouquet.addAccessory(bowKnot);
+                consolePrinter.notifyAddingAccessoryToBouquet(bowKnot);
+                break;
+            default:
+                throw new IllegalArgumentException("There is no such accessory type");
+        }
+    }
+
+    private Wrapper choseWrapperType(Scanner scanner) {
+        consolePrinter.askWrapperType();
+        String requiredWrapperType = scanner.nextLine();
+        switch (requiredWrapperType.toLowerCase().trim()){
+            case "cellophane":
+                return new CellophaneWrapper();
+            case "paper":
+                return new PaperWrapper();
+            case "textile":
+                return new TextileWrapper();
+            default:
+                throw new IllegalArgumentException("There is no such wrapper type");
+        }
+    }
+
+    public Bouquet<Flower> choseBouquet(Scanner scanner) {
+        List<Bouquet<Flower>> availableBouquets = stockManager.getBouquetsList();
+        consolePrinter.showAvailableBouquets(availableBouquets);
+        consolePrinter.askBouquetNumber();
+        int requeredBouquetNumber = 1;
+        try {
+            requeredBouquetNumber = Integer.parseInt(scanner.nextLine());
+        }catch (NumberFormatException e){
+            System.out.println("Incorrect input, first bouquet is chosen by default");
+            return availableBouquets.get(0);
+        }
+        try{
+            return availableBouquets.get(requeredBouquetNumber - 1);
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("There are no bouquets with such number, first one is " +
+                    "chosen by default");
+        }
+        return availableBouquets.get(0);
     }
 }

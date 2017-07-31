@@ -82,7 +82,11 @@ public class StockManager {
         return flowers;
     }
 
-    public void putBouquetToStok(Bouquet<? extends Flower> bouquet) {
+    public void putBouquetToStok(Bouquet bouquet) {
         stock.storeBouquet(bouquet);
+    }
+
+    public List<Bouquet<Flower>> getBouquetsList() {
+        return stock.getBouquets();
     }
 }

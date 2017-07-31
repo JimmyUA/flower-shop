@@ -7,6 +7,7 @@ import com.sergey.prykhodko.model.products.flowers.Flower;
 import com.sergey.prykhodko.model.products.flowers.WildFlower;
 import com.sergey.prykhodko.model.stock.Stock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsolePrinter {
@@ -38,7 +39,7 @@ public class ConsolePrinter {
 
         }
         stockRepresantation.append("///////////////////////////////////BOUQUETS//////////////////////////////////\n");
-        List<Bouquet> bouquets = stock.getBouquets();
+        List<Bouquet<Flower>> bouquets = stock.getBouquets();
         if(bouquets.isEmpty()){
             stockRepresantation.append("                                    EMPTY                                     \n");
         }
@@ -85,5 +86,31 @@ public class ConsolePrinter {
 
     public void notifySavingBouquetToStock(Bouquet<? extends Flower> bouquet) {
         System.out.println(bouquet.toString() + " were put to stock\n");
+    }
+
+    public void askAccessoryType() {
+        System.out.println("What accessory type do you want to add?\nPossible vriants are:\n" +
+                "- wrapper\n-tape\n- bow-knot");
+    }
+
+    public void notifyAddingAccessoryToBouquet(Accessory accessory) {
+        System.out.println(accessory.toString() + " were put to current bouquet\n");
+    }
+
+    public void askWrapperType() {
+        System.out.println("What wrapper type do you want to add?\nPossible vriants are:\n" +
+                "- cellopane\n- paper\n- textile");
+    }
+
+    public void showAvailableBouquets(List<Bouquet<Flower>> availableBouquets) {
+        System.out.println("There are next bouquets available:");
+        for (int i = 1; i <= availableBouquets.size(); i++) {
+            System.out.println(i  + ". " + availableBouquets.get(i - 1));
+        }
+
+    }
+
+    public void askBouquetNumber() {
+        System.out.println("Please chose bouquet number:");
     }
 }

@@ -1,6 +1,8 @@
 package com.sergey.prykhodko;
 
 import com.sergey.prykhodko.controler.MainController;
+import com.sergey.prykhodko.model.products.Bouquet;
+import com.sergey.prykhodko.model.products.flowers.Flower;
 import com.sergey.prykhodko.model.stock.Stock;
 import com.sergey.prykhodko.controler.ConsolePrinter;
 
@@ -28,7 +30,7 @@ public class Main
         String command;
         do {
             command = in.nextLine();
-            switch (command.toLowerCase()){
+            switch (command.toLowerCase().trim()){
                 case "exit":
                     break;
                 case "show stock":
@@ -40,6 +42,11 @@ public class Main
                 case "create bouquet":
                     mainController.createBouquet(in);
                     break;
+                case "add accessories":
+                    Bouquet<Flower> bouquet = mainController.choseBouquet(in);
+                    mainController.addAccessoriesToBouquet(in, bouquet);
+                    break;
+
                     
 
             }
