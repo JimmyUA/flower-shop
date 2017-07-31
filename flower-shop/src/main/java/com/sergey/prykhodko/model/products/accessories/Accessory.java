@@ -10,4 +10,5 @@ public abstract class Accessory {
     public int getPrice() {
         return this.price;
     }
+
 }
