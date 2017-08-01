@@ -9,6 +9,8 @@ import com.sergey.prykhodko.model.stock.Stock;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,8 @@ class StockManager {
 
     StockManager(StockFeatFileWorker worker) throws FileNotFoundException {
         this.worker = worker;
-        stockStorage = new File("stock.xml");
+        String fileName = "stock.xml";
+        stockStorage = new File(fileName);
         recreateStoredStock();
     }
 
