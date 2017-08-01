@@ -24,6 +24,7 @@ public class MainController {
 
     }
 
+    // this constructor is used when first one had thrown exception
     public MainController(Stock stock) {
         StockFeatFileWorker stockFeatFileWorker = new StockFeatFileWorker();
         stockManager = new StockManager(stockFeatFileWorker, stock);
@@ -31,12 +32,11 @@ public class MainController {
         bouquetManager = new BouquetManager();
     }
 
+    /*************************************************************************
+     *************************WORK WITH STOCK MANAGER*************************
+     *************************************************************************/
     public void saveStockToFile() throws IOException {
         stockManager.storeStock();
-    }
-
-    public void setEmptyStock() {
-        stockManager.setEmptyStock();
     }
 
     public void showStock(){
@@ -44,9 +44,37 @@ public class MainController {
         consolePrinter.showStock(stock);
     }
 
+    /*************************************************************************
+     *******************************NOTIFIERS*********************************
+     *************************************************************************/
+
     public void notifySavingStockToFile(){
         consolePrinter.notifySavingStockToFile();
     }
+
+    public void showHelpList() {
+        consolePrinter.printHelpList();
+    }
+
+    public void welcome() {
+        consolePrinter.printWelcome();
+    }
+
+    public void notifyNoSuchCommandAvailable() {
+        consolePrinter.printNoSuchCommandAvailable();
+    }
+
+    public void notifyIlligalArgument(String message) {
+        consolePrinter.printIlligalArgumentWarning(message);
+    }
+
+    public void notifyNoSuchElementFound(String message) {
+        consolePrinter.printNoSuchElementWarning(message);
+    }
+
+    /*************************************************************************
+     *******************************FLOWER ADDING METHODS*********************
+     *************************************************************************/
 
     public void addFlowersToStock(Scanner scanner) throws IllegalArgumentException{
         do {
@@ -109,6 +137,9 @@ public class MainController {
         return (DecorativeFlower) factory.createFlower(requiredFlowerType, requiredColor);
     }
 
+    /*************************************************************************
+     *******************************BOUQUET CREATION METHODS*********************
+     *************************************************************************/
 
     public void createBouquet(Scanner scanner) {
         consolePrinter.askBouquetType();
@@ -157,6 +188,10 @@ public class MainController {
         consolePrinter.notifySavingBouquetToStock(wildFlowerBouquet);
     }
 
+    /*************************************************************************
+     *******************************ACCESSORIES ADDING METHODS*********************
+     *************************************************************************/
+
     public void addAccessoriesToBouquet(Scanner scanner, Bouquet bouquet) {
         consolePrinter.askAccessoryType();
         String requiredAccessoryType = scanner.nextLine();
@@ -196,6 +231,10 @@ public class MainController {
         }
     }
 
+    /*************************************************************************
+     *******************************BOUQUETS SORTING METHODS*********************
+     *************************************************************************/
+
     public Bouquet<Flower> choseBouquet(Scanner scanner) {
         List<Bouquet<Flower>> availableBouquets = stockManager.getBouquetsList();
         if (availableBouquets.isEmpty()){
@@ -203,7 +242,7 @@ public class MainController {
         }
         consolePrinter.showAvailableBouquets(availableBouquets);
         consolePrinter.askBouquetNumber();
-        int requeredBouquetNumber = 1;
+        int requeredBouquetNumber;
         try {
             requeredBouquetNumber = Integer.parseInt(scanner.nextLine());
         }catch (NumberFormatException e){
@@ -220,17 +259,17 @@ public class MainController {
     }
 
     public void sortInFreshnessOrder(Bouquet<Flower> bouquetToSort) {
-        bouquetToSort.sortByFreshness();
+        bouquetToSort.sortFlowersByFreshness();
         consolePrinter.showBouquetComponents(bouquetToSort);
     }
 
-
-    public void searchFlowerInBouquetByStemLength(Bouquet<Flower> bouquetForSearch, Scanner scanner) {
+    public void searchFlowerInBouquetByStemLength(Bouquet<Flower> bouquetForSearch,
+                                                  Scanner scanner) throws IllegalArgumentException{
         consolePrinter.askStemLengthRange();
         String lengthLimits = scanner.nextLine().trim();
         String[] limits = lengthLimits.split(" ");
-        int bottomLimit = 0;
-        int topLimit = 0;
+        int bottomLimit;
+        int topLimit;
         if (limits.length == 1) {
             bottomLimit = topLimit = Integer.parseInt(limits[0]);
         } else if (limits.length == 2) {
@@ -247,23 +286,5 @@ public class MainController {
         consolePrinter.showFlowers(flowersWithStemLengthInRange);
     }
 
-    public void notifyNoSuchCommandAvailable() {
-        consolePrinter.printNoSuchCommandAvailable();
-    }
 
-    public void showHelpList() {
-        consolePrinter.printHelpList();
-    }
-
-    public void welcome() {
-        consolePrinter.printWelcome();
-    }
-
-    public void notifyIlligalArgument(String message) {
-        consolePrinter.printIlligalArgumentWarning(message);
-    }
-
-    public void notifyNoSuchElementFound(String message) {
-        consolePrinter.printNoSuchElementWarning(message);
-    }
 }

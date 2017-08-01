@@ -12,52 +12,54 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StockManager {
+class StockManager {
     private StockFeatFileWorker worker;
-    protected Stock stock;
+    Stock stock;
     private File stockStorage;
 
 
-    public StockManager(StockFeatFileWorker worker) throws FileNotFoundException {
+    StockManager(StockFeatFileWorker worker) throws FileNotFoundException {
         this.worker = worker;
         stockStorage = new File("stock.xml");
         recreateStoredStock();
     }
 
-    public StockManager(StockFeatFileWorker worker, Stock stock) {
+    // this constructor is used in case first one have thrown exception
+    StockManager(StockFeatFileWorker worker, Stock stock) {
         this.worker = worker;
         stockStorage = new File("stock.xml");
         this.stock = stock;
     }
 
-    public void storeStock() throws IOException {
-
-        worker.storeStockToFile(stock, stockStorage);
-
+    void setEmptyStock() {
+        stock = new Stock();
     }
 
-    public void recreateStoredStock() throws FileNotFoundException {
+    void storeStock() throws IOException {
+        worker.storeStockToFile(stock, stockStorage);
+    }
+
+    void recreateStoredStock() throws FileNotFoundException {
         stock = worker.getStockFromFile(stockStorage);
 
     }
 
-    public void putDecorativeFlowerToStock(DecorativeFlower flower){
+
+    void putDecorativeFlowerToStock(DecorativeFlower flower){
         stock.storeDecorativeFlower(flower);
     }
 
-    public void putWildFlowerToStock(WildFlower flower){
+    void putWildFlowerToStock(WildFlower flower){
         stock.storeWildFlower(flower);
     }
 
-    public void setEmptyStock() {
-        stock = new Stock();
-    }
 
-    public Stock getStock() {
+    Stock getStock() {
         return stock;
     }
 
-    public WildFlower[] getAllWildFlowersFromStok() {
+
+    WildFlower[] getAllWildFlowersFromStok() {
         List<WildFlower> wildFlowerList = stock.getWildFlowers();
         WildFlower[] wildFlowers = new WildFlower[wildFlowerList.size()];
         wildFlowerList.toArray(wildFlowers);
@@ -65,7 +67,7 @@ public class StockManager {
         return wildFlowers;
     }
 
-    public DecorativeFlower[] getAllDecorativeFlowersFromStok() {
+    DecorativeFlower[] getAllDecorativeFlowersFromStok() {
         List<DecorativeFlower> decorativeFlowerList = stock.getDecorativeFlowers();
         DecorativeFlower[] decorativeFlowers = new DecorativeFlower[decorativeFlowerList.size()];
         decorativeFlowerList.toArray(decorativeFlowers);
@@ -73,7 +75,7 @@ public class StockManager {
         return decorativeFlowers;
     }
 
-    public Flower[] getAllFlowersFromStok() {
+    Flower[] getAllFlowersFromStok() {
         List<DecorativeFlower> decorativeFlowerList = stock.getDecorativeFlowers();
         List<WildFlower> wildFlowerList = stock.getWildFlowers();
         Flower[] flowers = new Flower[decorativeFlowerList.size() + wildFlowerList.size()];
@@ -81,35 +83,38 @@ public class StockManager {
         Flower[] wildFlowers = new Flower[wildFlowerList.size()];
         decorativeFlowerList.toArray(decorativeFlowers);
         wildFlowerList.toArray(wildFlowers);
-        for (int i = 0; i < decorativeFlowers.length; i++) {
-            flowers[i] = decorativeFlowers[i];
-        }
-        for (int i = 0; i < wildFlowers.length; i++) {
-            flowers[i + decorativeFlowers.length] = wildFlowers[i];
-        }
+//        for (int i = 0; i < decorativeFlowers.length; i++) {
+//            flowers[i] = decorativeFlowers[i];
+//        }
+//        for (int i = 0; i < wildFlowers.length; i++) {
+//            flowers[i + decorativeFlowers.length] = wildFlowers[i];
+//        }
+        System.arraycopy(decorativeFlowers,0, flowers, 0, decorativeFlowers.length);
+        System.arraycopy(wildFlowers,0, flowers, decorativeFlowers.length, wildFlowers.length);
 
         return flowers;
     }
 
-    public void putBouquetToStok(Bouquet bouquet) {
+    void putBouquetToStok(Bouquet bouquet) {
         stock.storeBouquet(bouquet);
     }
 
-    public List<Bouquet<Flower>> getBouquetsList() {
+    List<Bouquet<Flower>> getBouquetsList() {
         return stock.getBouquets();
     }
 
-    public void clearFlowers(String list) {
+    // method is used to clear stock from files which now are in a bouquets
+    void clearFlowers(String list) {
         switch (list){
             case "wild":
-                stock.setWildFlowers(new ArrayList<WildFlower>());
+                stock.setWildFlowers(new ArrayList<>());
                 break;
             case "decorative":
-                stock.setDecorativeFlowers(new ArrayList<DecorativeFlower>());
+                stock.setDecorativeFlowers(new ArrayList<>());
                 break;
             case "both":
-                stock.setWildFlowers(new ArrayList<WildFlower>());
-                stock.setDecorativeFlowers(new ArrayList<DecorativeFlower>());
+                stock.setWildFlowers(new ArrayList<>());
+                stock.setDecorativeFlowers(new ArrayList<>());
                 break;
         }
     }

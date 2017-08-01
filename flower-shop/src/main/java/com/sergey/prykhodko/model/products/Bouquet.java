@@ -2,12 +2,16 @@ package com.sergey.prykhodko.model.products;
 
 import com.sergey.prykhodko.model.products.accessories.Accessory;
 import com.sergey.prykhodko.model.products.flowers.Flower;
-import com.sergey.prykhodko.model.products.flowers.WildFlower;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+/**
+ * Class describes bouquet and contains its elements
+ * @param <T>
+ */
 
 public class Bouquet<T extends Flower> {
     private List<Flower> flowers;
@@ -15,9 +19,14 @@ public class Bouquet<T extends Flower> {
     private int cost;
 
     public Bouquet() {
-        flowers = new ArrayList<Flower>();
-        accessories = new ArrayList<Accessory>();
+        flowers = new ArrayList<>();
+        accessories = new ArrayList<>();
     }
+
+    public void setAccessories(List<Accessory> accessories) {
+        this.accessories = accessories;
+    }
+
 
     public void addFlower(T flower){
         flowers.add(flower);
@@ -30,12 +39,9 @@ public class Bouquet<T extends Flower> {
 
     }
 
+
     public List<Accessory> getAccessories() {
         return accessories;
-    }
-
-    public void setAccessories(List<Accessory> accessories) {
-        this.accessories = accessories;
     }
 
     public List<Flower> getFlowers() {
@@ -43,18 +49,9 @@ public class Bouquet<T extends Flower> {
         return flowers;
     }
 
-    public int totalCost(){
-        return cost;
-    }
 
-    @Override
-    public String toString() {
-        return "" + getClass().getSimpleName() + " | total cost " + cost/100.0 ;
-    }
-
-
-    public void sortByFreshness() {
-        Collections.sort(flowers, new Comparator<Flower>() {
+    public void sortFlowersByFreshness() {
+        flowers.sort(new Comparator<Flower>() {
             @Override
             public int compare(Flower o1, Flower o2) {
                 return o1.getDateOfCuttingDown().compareTo(o2.getDateOfCuttingDown());
@@ -71,5 +68,10 @@ public class Bouquet<T extends Flower> {
             }
         }
         return flowersWithStemLengthInRange;
+    }
+
+    @Override
+    public String toString() {
+        return "" + getClass().getSimpleName() + " | total cost " + cost/100.0 ;
     }
 }

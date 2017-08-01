@@ -1,7 +1,13 @@
 package com.sergey.prykhodko.model.products.flowers;
 
+/**
+ * Enum represanting types of wild flowers and contains data, such as price and stem length
+ * accordingly to the flower type
+ */
+
 public enum WildFlowersTypes implements FlowerType{
     CHAMOMILE(100, 400), SUNFLOWER(200, 500), ORCHID(140, 300), FORGETMENOTFLOWER(90, 200), CORNFLOWER(120, 220);
+
     private int price;
     private int stemLength;
 
@@ -18,7 +24,4 @@ public enum WildFlowersTypes implements FlowerType{
         return stemLength;
     }
 
-    public void setStemLength(int stemLength) {
-        this.stemLength = stemLength;
-    }
 }

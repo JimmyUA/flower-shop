@@ -3,6 +3,7 @@ package com.sergey.prykhodko.controler;
 import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.flowers.*;
 
+
 public class BouquetManager {
 
     public Bouquet<WildFlower> createNewWildFlowersBouquet(WildFlower...flowers){

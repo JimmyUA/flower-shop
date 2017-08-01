@@ -1,12 +1,10 @@
 package com.sergey.prykhodko.model.products.flowers;
 
-import sun.util.calendar.BaseCalendar;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- *
+ * Class describes general flower properties
  */
 public abstract class Flower {
     protected LocalDateTime dateOfCuttingDown;

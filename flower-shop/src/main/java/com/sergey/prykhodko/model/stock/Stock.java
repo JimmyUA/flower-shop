@@ -18,9 +18,9 @@ public class Stock {
 
 
     public Stock() {
-        wildFlowers = new ArrayList<WildFlower>();
-        decorativeFlowers = new ArrayList<DecorativeFlower>();
-        bouquets = new ArrayList<Bouquet<Flower>>();
+        wildFlowers = new ArrayList<>();
+        decorativeFlowers = new ArrayList<>();
+        bouquets = new ArrayList<>();
     }
 
 
@@ -31,7 +31,8 @@ public class Stock {
     public void setDecorativeFlowers(List<DecorativeFlower> decorativeFlowers) {
         this.decorativeFlowers = decorativeFlowers;
     }
-    
+
+
     public void storeWildFlower(WildFlower flower){
         wildFlowers.add(flower);
     }
@@ -40,7 +41,7 @@ public class Stock {
         decorativeFlowers.add(flower);
     }
 
-    public void storeBouquet(Bouquet bouquet){
+    public void storeBouquet(Bouquet<Flower> bouquet){
         bouquets.add(bouquet);
     }
 

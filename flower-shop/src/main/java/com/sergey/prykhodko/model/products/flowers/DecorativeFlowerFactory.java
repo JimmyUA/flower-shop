@@ -3,6 +3,7 @@ package com.sergey.prykhodko.model.products.flowers;
 public class DecorativeFlowerFactory implements FlowerFactory{
     @Override
     public Flower createFlower(String type, String color) throws IllegalArgumentException{
+
         switch (type.toLowerCase()){
             case "rose":
                 return new DecorativeFlower(DecorativeFlowersTypes.ROSE, color);
