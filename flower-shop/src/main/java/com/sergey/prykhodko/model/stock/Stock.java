@@ -1,6 +1,5 @@
 package com.sergey.prykhodko.model.stock;
 
-import com.sergey.prykhodko.model.products.accessories.Accessory;
 import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.flowers.DecorativeFlower;
 import com.sergey.prykhodko.model.products.flowers.Flower;
@@ -9,6 +8,9 @@ import com.sergey.prykhodko.model.products.flowers.WildFlower;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for storing flowers and bouquets
+ */
 public class Stock {
     private List<WildFlower> wildFlowers;
     private List<DecorativeFlower> decorativeFlowers;
@@ -29,11 +31,7 @@ public class Stock {
     public void setDecorativeFlowers(List<DecorativeFlower> decorativeFlowers) {
         this.decorativeFlowers = decorativeFlowers;
     }
-
-    public void setBouquets(List<Bouquet<Flower>> bouquets) {
-        this.bouquets = bouquets;
-    }
-
+    
     public void storeWildFlower(WildFlower flower){
         wildFlowers.add(flower);
     }
