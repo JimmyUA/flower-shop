@@ -109,7 +109,7 @@ public class MainController {
     }
 
     private WildFlower choseWildFlowerType(FlowerFactory factory, Scanner scanner) {
-        consolePrinter.askFlowerTypeAndColor();
+        consolePrinter.askFlowerTypeAndColor("wild");
         String requiredFlowerTypeAndColor = scanner.nextLine();
         String[] typeAndColor = requiredFlowerTypeAndColor.split(" ");
         String requiredColor;
@@ -124,7 +124,7 @@ public class MainController {
     }
 
     private DecorativeFlower choseDecorativelowerType(FlowerFactory factory, Scanner scanner) {
-        consolePrinter.askFlowerTypeAndColor();
+        consolePrinter.askFlowerTypeAndColor("decorative");
         String requiredFlowerTypeAndColor = scanner.nextLine();
         String[] typeAndColor = requiredFlowerTypeAndColor.split(" ");
         String requiredColor;

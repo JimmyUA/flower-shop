@@ -2,9 +2,7 @@ package com.sergey.prykhodko.controler;
 
 import com.sergey.prykhodko.model.products.accessories.Accessory;
 import com.sergey.prykhodko.model.products.Bouquet;
-import com.sergey.prykhodko.model.products.flowers.DecorativeFlower;
-import com.sergey.prykhodko.model.products.flowers.Flower;
-import com.sergey.prykhodko.model.products.flowers.WildFlower;
+import com.sergey.prykhodko.model.products.flowers.*;
 import com.sergey.prykhodko.model.stock.Stock;
 
 import java.util.List;
@@ -110,9 +108,21 @@ import java.util.List;
 
     }
 
-     void askFlowerTypeAndColor() {
+     void askFlowerTypeAndColor(String flowerClass) {
         System.out.println("What flower do you want to create?" +
                 "\nPossible vriants are:\n");
+        if (flowerClass.equals("wild")){
+            for (WildFlowersTypes type : WildFlowersTypes.values()
+                 ) {
+                System.out.println("- " + type);
+            }
+        }
+        else if(flowerClass.equals("decorative")){
+            for (DecorativeFlowersTypes type : DecorativeFlowersTypes.values()
+                    ) {
+                System.out.println("- " + type);
+            }
+        }
     }
 
      void askBouquetType() {
