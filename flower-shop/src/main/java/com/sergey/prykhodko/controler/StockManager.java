@@ -27,7 +27,7 @@ class StockManager {
     // this constructor is used in case first one have thrown exception
     StockManager(StockFeatFileWorker worker, Stock stock) {
         this.worker = worker;
-        stockStorage = new File("stock.xml");
+        stockStorage = new File("resources/stock.xml");
         this.stock = stock;
     }
 
