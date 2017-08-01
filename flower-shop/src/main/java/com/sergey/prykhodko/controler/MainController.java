@@ -74,7 +74,8 @@ public class MainController {
                 stockManager.putDecorativeFlowerToStock((DecorativeFlower) flower);
                 break;
                 default:
-                    throw new IllegalArgumentException("No such flower class");
+                    consolePrinter.printNoSuchClassExist();
+                    return;
         }
         consolePrinter.notifySavingFlowerToStock(flower);
     }
@@ -118,27 +119,42 @@ public class MainController {
     private void choseAndCreateRequiredBouquetType(String requiredBouquetType) {
         switch (requiredBouquetType){
             case "wild":
-                WildFlower[] wildFlowers = stockManager.getAllWildFlowersFromStok();
-                Bouquet<WildFlower> wildFlowerBouquet = bouquetManager.createNewWildFlowersBouquet(wildFlowers);
-                stockManager.putBouquetToStok(wildFlowerBouquet);
-                consolePrinter.notifySavingBouquetToStock(wildFlowerBouquet);
+                createWildFlowerBouquet();
                 break;
             case "decorative":
-                DecorativeFlower[] decorativeFlowers = stockManager.getAllDecorativeFlowersFromStok();
-                Bouquet<DecorativeFlower> decorativeFlowerBouquet =
-                        bouquetManager.createNewDecorativeFlowersBouquet(decorativeFlowers);
-                stockManager.putBouquetToStok(decorativeFlowerBouquet);
-                consolePrinter.notifySavingBouquetToStock(decorativeFlowerBouquet);
+                createDecorativeFlowerBouquet();
                 break;
             case "mixed":
-                Flower[] flowers = stockManager.getAllFlowersFromStok();
-                Bouquet<Flower> mixedFlowerBouquet = bouquetManager.createNewMixedFlowersBouquet(flowers);
-                stockManager.putBouquetToStok(mixedFlowerBouquet);
-                consolePrinter.notifySavingBouquetToStock(mixedFlowerBouquet);
+                createMixedBouquet();
                 break;
                 default:
-                    throw new IllegalArgumentException("There is no such bouquet type");
+                    notifyIlligalArgument("No such bouquet types!");
         }
+    }
+
+    private void createMixedBouquet() {
+        Flower[] flowers = stockManager.getAllFlowersFromStok();
+        Bouquet<Flower> mixedFlowerBouquet = bouquetManager.createNewMixedFlowersBouquet(flowers);
+        stockManager.putBouquetToStok(mixedFlowerBouquet);
+        stockManager.clearFlowers("both");
+        consolePrinter.notifySavingBouquetToStock(mixedFlowerBouquet);
+    }
+
+    private void createDecorativeFlowerBouquet() {
+        DecorativeFlower[] decorativeFlowers = stockManager.getAllDecorativeFlowersFromStok();
+        Bouquet<DecorativeFlower> decorativeFlowerBouquet =
+                bouquetManager.createNewDecorativeFlowersBouquet(decorativeFlowers);
+        stockManager.putBouquetToStok(decorativeFlowerBouquet);
+        stockManager.clearFlowers("decorative");
+        consolePrinter.notifySavingBouquetToStock(decorativeFlowerBouquet);
+    }
+
+    private void createWildFlowerBouquet() {
+        WildFlower[] wildFlowers = stockManager.getAllWildFlowersFromStok();
+        Bouquet<WildFlower> wildFlowerBouquet = bouquetManager.createNewWildFlowersBouquet(wildFlowers);
+        stockManager.putBouquetToStok(wildFlowerBouquet);
+        stockManager.clearFlowers("wild");
+        consolePrinter.notifySavingBouquetToStock(wildFlowerBouquet);
     }
 
     public void addAccessoriesToBouquet(Scanner scanner, Bouquet bouquet) {
@@ -229,5 +245,25 @@ public class MainController {
         List<Flower> flowersWithStemLengthInRange = bouquetForSearch.
                 getFlowersWithStemInRange(bottomLimit, topLimit);
         consolePrinter.showFlowers(flowersWithStemLengthInRange);
+    }
+
+    public void notifyNoSuchCommandAvailable() {
+        consolePrinter.printNoSuchCommandAvailable();
+    }
+
+    public void showHelpList() {
+        consolePrinter.printHelpList();
+    }
+
+    public void welcome() {
+        consolePrinter.printWelcome();
+    }
+
+    public void notifyIlligalArgument(String message) {
+        consolePrinter.printIlligalArgumentWarning(message);
+    }
+
+    public void notifyNoSuchElementFound(String message) {
+        consolePrinter.printNoSuchElementWarning(message);
     }
 }

@@ -9,6 +9,7 @@ import com.sergey.prykhodko.model.stock.Stock;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StockManager {
@@ -96,5 +97,20 @@ public class StockManager {
 
     public List<Bouquet<Flower>> getBouquetsList() {
         return stock.getBouquets();
+    }
+
+    public void clearFlowers(String list) {
+        switch (list){
+            case "wild":
+                stock.setWildFlowers(new ArrayList<WildFlower>());
+                break;
+            case "decorative":
+                stock.setDecorativeFlowers(new ArrayList<DecorativeFlower>());
+                break;
+            case "both":
+                stock.setWildFlowers(new ArrayList<WildFlower>());
+                stock.setDecorativeFlowers(new ArrayList<DecorativeFlower>());
+                break;
+        }
     }
 }

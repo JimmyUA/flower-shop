@@ -67,7 +67,7 @@ public class ConsolePrinter {
 
     public void askFlowerClass() {
         System.out.println("What flower type do you want to create?\nPossible vriants are:\n" +
-                "- wild\n-decorative\n- stop (to stop addition)");   //"- rose\n- lilly\n- tulip\nchrisanthemum\n-"
+                "- wild\n- decorative\n- stop (to stop addition)");
 
     }
 
@@ -123,6 +123,9 @@ public class ConsolePrinter {
             System.out.println(flower);
         }
         System.out.println("\033[0;1mAccessories:\033[0m");
+        if (bouquet.getAccessories().isEmpty()){
+            System.out.println("No accessories!");
+        }
         for (Accessory accessory:bouquet.getAccessories()
                 ) {
             System.out.println(accessory);
@@ -140,5 +143,45 @@ public class ConsolePrinter {
             String stemLength = "Stem length: " + flower.getStemLength() + "mm";
             System.out.println("\033[0;1m" + stemLength + "\033[0m");
         }
+    }
+
+    public void printNoSuchCommandAvailable() {
+        System.out.println("\n\u001B[31mNo such command!!!\u001B[0m \nPlease check \"h\" or \"help\"\n");
+    }
+
+    public void printHelpList() {
+        System.out.println("\033[0;1m///////////////////////////////FLOWER SHOP//////////////////////////////////\033[0m");
+        System.out.println("Programm for storing and managing flower shop data, such as flowers," +
+                " bouquets and accessories.");
+        System.out.println("You are welcome to use next commands:");
+        System.out.println("\033[0;1m\"h\"\033[0m or \033[0;1m\"help\"\033[0m");
+        System.out.println("     -to check commands and instructions");
+        System.out.println("\033[0;1m\"add flowers\"\033[0m");
+        System.out.println("     -to add flowers to stock");
+        System.out.println("\033[0;1m\"create bouquet\"\033[0m");
+        System.out.println("     -to create a bouquet");
+        System.out.println("\033[0;1m\"add accessories\"\033[0m");
+        System.out.println("     -to add accessories to existing bouquet");
+        System.out.println("\033[0;1m\"sort\"\033[0m");
+        System.out.println("     -to sort flowers in existing bouquet by freshness");
+        System.out.println("\033[0;1m\"search by stem\"\033[0m");
+        System.out.println("     -to search flowers in existing bouquet by stem length");
+    }
+
+    public void printWelcome() {
+        System.out.println("\033[0;1m///////////////////////////WELCOME TO FLOWER SHOP//////////////////////////////\033[0m");
+        System.out.println("Please check \"h\" or \"-help\" to see available commands");
+    }
+
+    public void printNoSuchClassExist() {
+        System.out.println("\n\u001B[31mNo such flowers class found!\u001B[0m\n");
+    }
+
+    public void printIlligalArgumentWarning(String message) {
+        System.out.println("\n\u001B[31m"+ message +"\u001B[0m\nEntering main menu...\n");
+    }
+
+    public void printNoSuchElementWarning(String message) {
+        System.out.println("\n\u001B[31m"+ message +"\u001B[0m\nEntering main menu...\n");
     }
 }
