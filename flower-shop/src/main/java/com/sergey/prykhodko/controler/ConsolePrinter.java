@@ -49,17 +49,6 @@ public class ConsolePrinter {
                 stockRepresantation.append(bouquet.toString()).append("\n");
             }
         }
-        stockRepresantation.append("///////////////////////////////////ACCESSORIES//////////////////////////////////\n");
-        List<Accessory> accessories = stock.getAccessories();
-        if(accessories.isEmpty()){
-            stockRepresantation.append("                                    EMPTY                                     \n");
-        }
-        else {
-            for (Accessory accessory : stock.getAccessories()
-                    ) {
-                stockRepresantation.append(accessory.toString()).append("\n");
-            }
-        }
         stockRepresantation.append("////////////////////////////////////////////////////////////////////////////");
 
         System.out.println(stockRepresantation);
@@ -90,7 +79,7 @@ public class ConsolePrinter {
 
     public void askAccessoryType() {
         System.out.println("What accessory type do you want to add?\nPossible vriants are:\n" +
-                "- wrapper\n-tape\n- bow-knot");
+                "- wrapper\n- tape\n- bow-knot");
     }
 
     public void notifyAddingAccessoryToBouquet(Accessory accessory) {

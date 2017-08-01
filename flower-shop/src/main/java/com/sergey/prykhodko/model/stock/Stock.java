@@ -11,17 +11,14 @@ import java.util.List;
 
 public class Stock {
     private List<WildFlower> wildFlowers;
-
-
     private List<DecorativeFlower> decorativeFlowers;
     private List<Bouquet<Flower>> bouquets;
-    private List<Accessory> accessories;
+
 
     public Stock() {
         wildFlowers = new ArrayList<WildFlower>();
         decorativeFlowers = new ArrayList<DecorativeFlower>();
         bouquets = new ArrayList<Bouquet<Flower>>();
-        accessories = new ArrayList<Accessory>();
     }
 
 
@@ -37,10 +34,6 @@ public class Stock {
         this.bouquets = bouquets;
     }
 
-    public void setAccessories(List<Accessory> accessories) {
-        this.accessories = accessories;
-    }
-
     public void storeWildFlower(WildFlower flower){
         wildFlowers.add(flower);
     }
@@ -51,10 +44,6 @@ public class Stock {
 
     public void storeBouquet(Bouquet bouquet){
         bouquets.add(bouquet);
-    }
-
-    public void storeAccessory(Accessory accessory){
-        accessories.add(accessory);
     }
 
     public List<WildFlower> getWildFlowers() {
@@ -69,7 +58,4 @@ public class Stock {
         return bouquets;
     }
 
-    public List<Accessory> getAccessories() {
-        return accessories;
-    }
 }
