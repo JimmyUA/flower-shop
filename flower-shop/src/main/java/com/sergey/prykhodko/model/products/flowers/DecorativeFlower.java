@@ -19,4 +19,9 @@ public class DecorativeFlower extends Flower {
         return this.type.getStemLength();
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName()+ " " + super.color + " " + type + " " + " | stem length " +
+                type.getStemLength() + " | price " + type.getPrice()/100.0 + "\nWere cut down: " + super.dateOfCuttingDown;
+    }
 }

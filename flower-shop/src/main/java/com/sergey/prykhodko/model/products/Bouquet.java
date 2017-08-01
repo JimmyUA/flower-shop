@@ -2,6 +2,7 @@ package com.sergey.prykhodko.model.products;
 
 import com.sergey.prykhodko.model.products.accessories.Accessory;
 import com.sergey.prykhodko.model.products.flowers.Flower;
+import com.sergey.prykhodko.model.products.flowers.WildFlower;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,5 +32,8 @@ public class Bouquet<T extends Flower> {
         return cost;
     }
 
-
+    @Override
+    public String toString() {
+        return "" + getClass().getSimpleName() + " | total cost " + cost/100.0 ;
+    }
 }

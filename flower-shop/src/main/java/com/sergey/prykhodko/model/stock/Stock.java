@@ -11,6 +11,8 @@ import java.util.List;
 
 public class Stock {
     private List<WildFlower> wildFlowers;
+
+
     private List<DecorativeFlower> decorativeFlowers;
     private List<Bouquet<Flower>> bouquets;
     private List<Accessory> accessories;
@@ -23,7 +25,21 @@ public class Stock {
     }
 
 
+    public void setWildFlowers(List<WildFlower> wildFlowers) {
+        this.wildFlowers = wildFlowers;
+    }
 
+    public void setDecorativeFlowers(List<DecorativeFlower> decorativeFlowers) {
+        this.decorativeFlowers = decorativeFlowers;
+    }
+
+    public void setBouquets(List<Bouquet<Flower>> bouquets) {
+        this.bouquets = bouquets;
+    }
+
+    public void setAccessories(List<Accessory> accessories) {
+        this.accessories = accessories;
+    }
 
     public void storeWildFlower(WildFlower flower){
         wildFlowers.add(flower);
