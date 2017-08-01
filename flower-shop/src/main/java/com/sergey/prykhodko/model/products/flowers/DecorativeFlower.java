@@ -21,7 +21,9 @@ public class DecorativeFlower extends Flower {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName()+ " " + super.color + " " + type + " " + " | stem length " +
-                type.getStemLength() + " | price " + type.getPrice()/100.0 + "\nWere cut down: " + super.dateOfCuttingDown;
+        return getClass().getSimpleName()+ " " + super.color + " " + type + " | stem length " +
+                type.getStemLength() + " | price " + type.getPrice()/100.0 + "\nWere cut down: "
+                + dateOfCuttingDown.getMonth() + " " + dateOfCuttingDown.getDayOfMonth() +
+                " " + dateOfCuttingDown.getHour() + ":" + dateOfCuttingDown.getMinute();
     }
 }
