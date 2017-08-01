@@ -49,8 +49,11 @@ public class Main
                 case "sort":
                     Bouquet<Flower> bouquetToSort = mainController.choseBouquet(in);
                     mainController.sortInFreshnessOrder(bouquetToSort);
-                    
-
+                    break;
+                case "search by stem":
+                    Bouquet<Flower> bouquetForSearch = mainController.choseBouquet(in);
+                    mainController.searchFlowerInBouquetByStemLength(bouquetForSearch, in);
+                    break;
             }
         }while (!command.equalsIgnoreCase("exit"));
         try {

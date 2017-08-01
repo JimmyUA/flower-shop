@@ -10,7 +10,7 @@ public class WildFlowerFactory implements FlowerFactory {
                 return new WildFlower(WildFlowersTypes.SUNFLOWER, color);
             case "orchid":
                 return new WildFlower(WildFlowersTypes.ORCHID, color);
-            case "forgetmonotflower":
+            case "forgetmenotflower":
                 return new WildFlower(WildFlowersTypes.FORGETMENOTFLOWER, color);
             case "cornflower":
                 return new WildFlower(WildFlowersTypes.CORNFLOWER, color);

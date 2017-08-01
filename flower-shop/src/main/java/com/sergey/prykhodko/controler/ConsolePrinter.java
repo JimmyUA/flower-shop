@@ -103,7 +103,7 @@ public class ConsolePrinter {
     }
 
     public void showAvailableBouquets(List<Bouquet<Flower>> availableBouquets) {
-        System.out.println("There are next bouquets available:");
+        System.out.println("\033[0;1mThere are next bouquets available:\033[0m");
         for (int i = 1; i <= availableBouquets.size(); i++) {
             System.out.println(i  + ". " + availableBouquets.get(i - 1));
         }
@@ -117,15 +117,28 @@ public class ConsolePrinter {
 
     public void showBouquetComponents(Bouquet<Flower> bouquet) {
         System.out.println(bouquet + "consist of:");
-        System.out.println("Flowers:");
+        System.out.println("\033[0;1mFlowers: \033[0m");
         for (Flower flower:bouquet.getFlowers()
              ) {
             System.out.println(flower);
         }
-        System.out.println("Accessories:");
+        System.out.println("\033[0;1mAccessories:\033[0m");
         for (Accessory accessory:bouquet.getAccessories()
                 ) {
             System.out.println(accessory);
+        }
+    }
+
+    public void askStemLengthRange() {
+        System.out.println("please enter bottom and top limits for flower stem length:");
+    }
+
+    public void showFlowers(List<Flower> flowers) {
+        for (Flower flower : flowers
+             ) {
+            System.out.println(flower);
+            String stemLength = "Stem length: " + flower.getStemLength() + "mm";
+            System.out.println("\033[0;1m" + stemLength + "\033[0m");
         }
     }
 }

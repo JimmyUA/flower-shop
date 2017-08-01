@@ -9,6 +9,7 @@ public class DecorativeFlower extends Flower {
         this.type = type;
         super.color = color;
         super.dateOfCuttingDown = LocalDateTime.now().minusDays(1);
+        super.stemLength = type.getStemLength();
     }
 
     public int price(){

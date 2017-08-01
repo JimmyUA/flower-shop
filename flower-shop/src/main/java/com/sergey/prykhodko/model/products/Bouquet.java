@@ -61,4 +61,15 @@ public class Bouquet<T extends Flower> {
             }
         });
     }
+
+    public List<Flower> getFlowersWithStemInRange(int bottomLimit, int topLimit) {
+        List<Flower> flowersWithStemLengthInRange = new ArrayList<>();
+        for (Flower flower : flowers
+             ) {
+            if (flower.getStemLength() >= bottomLimit && flower.getStemLength() <= topLimit){
+                flowersWithStemLengthInRange.add(flower);
+            }
+        }
+        return flowersWithStemLengthInRange;
+    }
 }

@@ -11,10 +11,15 @@ import java.time.LocalDateTime;
 public abstract class Flower {
     protected LocalDateTime dateOfCuttingDown;
     protected String color;
+    protected int stemLength;
 
     public abstract int price();
 
     public LocalDateTime getDateOfCuttingDown(){
         return dateOfCuttingDown;
+    }
+
+    public int getStemLength() {
+        return stemLength;
     }
 }

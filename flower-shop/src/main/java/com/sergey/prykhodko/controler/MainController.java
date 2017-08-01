@@ -207,4 +207,27 @@ public class MainController {
         bouquetToSort.sortByFreshness();
         consolePrinter.showBouquetComponents(bouquetToSort);
     }
+
+
+    public void searchFlowerInBouquetByStemLength(Bouquet<Flower> bouquetForSearch, Scanner scanner) {
+        consolePrinter.askStemLengthRange();
+        String lengthLimits = scanner.nextLine().trim();
+        String[] limits = lengthLimits.split(" ");
+        int bottomLimit = 0;
+        int topLimit = 0;
+        if (limits.length == 1) {
+            bottomLimit = topLimit = Integer.parseInt(limits[0]);
+        } else if (limits.length == 2) {
+            bottomLimit = Integer.parseInt(limits[0]);
+            topLimit = Integer.parseInt(limits[1]);
+        } else {
+            throw new IllegalArgumentException("Limits were not entered correctly");
+        }
+        if (topLimit < bottomLimit) {
+            throw new IllegalArgumentException("Limits were not entered correctly");
+        }
+        List<Flower> flowersWithStemLengthInRange = bouquetForSearch.
+                getFlowersWithStemInRange(bottomLimit, topLimit);
+        consolePrinter.showFlowers(flowersWithStemLengthInRange);
+    }
 }
