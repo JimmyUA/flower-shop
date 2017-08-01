@@ -31,12 +31,14 @@ public class Main
         String command;
         mainController.welcome();
         handleCommands(mainController, in);
+
         try {
             mainController.saveStockToFile();
         } catch (IOException e) {
             System.out.println("Can't save changes!");
             return;
         }
+
         mainController.notifySavingStockToFile();
 
     }
@@ -72,6 +74,7 @@ public class Main
 
                 case "add accessories":
                     Bouquet<Flower> bouquet = null;
+
                     try {
                         bouquet = mainController.choseBouquet(in);
                     }catch (NoSuchElementException e){
@@ -84,6 +87,7 @@ public class Main
                     }catch (IllegalArgumentException e){
                         mainController.notifyIlligalArgument(e.getMessage());
                     }
+
                     break;
 
                 case "sort":
@@ -99,7 +103,12 @@ public class Main
 
                 case "search by stem":
                     Bouquet<Flower> bouquetForSearch = mainController.choseBouquet(in);
+
+                    try {
                     mainController.searchFlowerInBouquetByStemLength(bouquetForSearch, in);
+                        }catch (IllegalArgumentException e){
+                             mainController.notifyIlligalArgument(e.getMessage());
+                            }
                     break;
 
                     default:
