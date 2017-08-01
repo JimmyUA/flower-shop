@@ -113,4 +113,19 @@ public class ConsolePrinter {
     public void askBouquetNumber() {
         System.out.println("Please chose bouquet number:");
     }
+
+
+    public void showBouquetComponents(Bouquet<Flower> bouquet) {
+        System.out.println(bouquet + "consist of:");
+        System.out.println("Flowers:");
+        for (Flower flower:bouquet.getFlowers()
+             ) {
+            System.out.println(flower);
+        }
+        System.out.println("Accessories:");
+        for (Accessory accessory:bouquet.getAccessories()
+                ) {
+            System.out.println(accessory);
+        }
+    }
 }

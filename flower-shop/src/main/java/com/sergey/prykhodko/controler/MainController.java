@@ -8,6 +8,7 @@ import com.sergey.prykhodko.model.stock.Stock;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MainController {
@@ -181,6 +182,9 @@ public class MainController {
 
     public Bouquet<Flower> choseBouquet(Scanner scanner) {
         List<Bouquet<Flower>> availableBouquets = stockManager.getBouquetsList();
+        if (availableBouquets.isEmpty()){
+            throw new NoSuchElementException("No bouquets are available");
+        }
         consolePrinter.showAvailableBouquets(availableBouquets);
         consolePrinter.askBouquetNumber();
         int requeredBouquetNumber = 1;
@@ -197,5 +201,10 @@ public class MainController {
                     "chosen by default");
         }
         return availableBouquets.get(0);
+    }
+
+    public void sortInFreshnessOrder(Bouquet<Flower> bouquetToSort) {
+        bouquetToSort.sortByFreshness();
+        consolePrinter.showBouquetComponents(bouquetToSort);
     }
 }

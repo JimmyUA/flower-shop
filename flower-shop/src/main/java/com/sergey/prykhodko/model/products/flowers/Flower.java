@@ -14,5 +14,7 @@ public abstract class Flower {
 
     public abstract int price();
 
-
+    public LocalDateTime getDateOfCuttingDown(){
+        return dateOfCuttingDown;
+    }
 }

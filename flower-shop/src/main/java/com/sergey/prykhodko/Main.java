@@ -46,7 +46,9 @@ public class Main
                     Bouquet<Flower> bouquet = mainController.choseBouquet(in);
                     mainController.addAccessoriesToBouquet(in, bouquet);
                     break;
-
+                case "sort":
+                    Bouquet<Flower> bouquetToSort = mainController.choseBouquet(in);
+                    mainController.sortInFreshnessOrder(bouquetToSort);
                     
 
             }

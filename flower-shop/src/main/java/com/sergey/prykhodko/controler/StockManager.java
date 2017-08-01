@@ -76,8 +76,16 @@ public class StockManager {
         List<DecorativeFlower> decorativeFlowerList = stock.getDecorativeFlowers();
         List<WildFlower> wildFlowerList = stock.getWildFlowers();
         Flower[] flowers = new Flower[decorativeFlowerList.size() + wildFlowerList.size()];
-        decorativeFlowerList.toArray(flowers);
-        wildFlowerList.toArray(flowers);
+        Flower[] decorativeFlowers = new Flower[decorativeFlowerList.size()];
+        Flower[] wildFlowers = new Flower[wildFlowerList.size()];
+        decorativeFlowerList.toArray(decorativeFlowers);
+        wildFlowerList.toArray(wildFlowers);
+        for (int i = 0; i < decorativeFlowers.length; i++) {
+            flowers[i] = decorativeFlowers[i];
+        }
+        for (int i = 0; i < wildFlowers.length; i++) {
+            flowers[i + decorativeFlowers.length] = wildFlowers[i];
+        }
 
         return flowers;
     }

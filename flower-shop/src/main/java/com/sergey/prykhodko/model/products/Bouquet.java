@@ -5,6 +5,8 @@ import com.sergey.prykhodko.model.products.flowers.Flower;
 import com.sergey.prykhodko.model.products.flowers.WildFlower;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Bouquet<T extends Flower> {
@@ -28,6 +30,19 @@ public class Bouquet<T extends Flower> {
 
     }
 
+    public List<Accessory> getAccessories() {
+        return accessories;
+    }
+
+    public void setAccessories(List<Accessory> accessories) {
+        this.accessories = accessories;
+    }
+
+    public List<Flower> getFlowers() {
+
+        return flowers;
+    }
+
     public int totalCost(){
         return cost;
     }
@@ -35,5 +50,15 @@ public class Bouquet<T extends Flower> {
     @Override
     public String toString() {
         return "" + getClass().getSimpleName() + " | total cost " + cost/100.0 ;
+    }
+
+
+    public void sortByFreshness() {
+        Collections.sort(flowers, new Comparator<Flower>() {
+            @Override
+            public int compare(Flower o1, Flower o2) {
+                return o1.getDateOfCuttingDown().compareTo(o2.getDateOfCuttingDown());
+            }
+        });
     }
 }
