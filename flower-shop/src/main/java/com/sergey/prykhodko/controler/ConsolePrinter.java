@@ -179,17 +179,21 @@ import java.util.List;
                  " bouquets and accessories.");
          System.out.println("You are welcome to use next commands:");
          System.out.println("\033[0;1m\"h\"\033[0m or \033[0;1m\"help\"\033[0m");
-         System.out.println("     -to check commands and instructions");
+         System.out.println("\t-to check commands and instructions");
          System.out.println("\033[0;1m\"add flowers\"\033[0m");
-         System.out.println("     -to add flowers to stock");
+         System.out.println("\t-to add flowers to stock");
          System.out.println("\033[0;1m\"create bouquet\"\033[0m");
-         System.out.println("     -to create a bouquet");
+         System.out.println("\t-to create a bouquet");
          System.out.println("\033[0;1m\"add accessories\"\033[0m");
-         System.out.println("     -to add accessories to existing bouquet");
+         System.out.println("\t-to add accessories to existing bouquet");
          System.out.println("\033[0;1m\"sort\"\033[0m");
-         System.out.println("     -to sort flowers in existing bouquet by freshness");
+         System.out.println("\t-to sort flowers in existing bouquet by freshness");
          System.out.println("\033[0;1m\"search by stem\"\033[0m");
-         System.out.println("     -to search flowers in existing bouquet by stem length");
+         System.out.println("\t-to search flowers in existing bouquet by stem length");
+         System.out.println("\033[0;1m\"show stock\"\033[0m");
+         System.out.println("\t-to check all stock content");
+         System.out.println("\033[0;1m\"exit\"\033[0m");
+         System.out.println("\t-to stop application execution");
      }
 
      void printWelcome() {
@@ -197,4 +201,7 @@ import java.util.List;
          System.out.println("Please check \"h\" or \"-help\" to see available commands");
      }
 
+     public void showMessage(String message) {
+         System.out.println("\u001B[31m" + message + "\u001B[0m");
+     }
  }

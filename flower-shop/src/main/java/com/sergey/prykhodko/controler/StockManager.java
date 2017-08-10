@@ -5,6 +5,7 @@ import com.sergey.prykhodko.model.products.flowers.DecorativeFlower;
 import com.sergey.prykhodko.model.products.flowers.Flower;
 import com.sergey.prykhodko.model.products.flowers.WildFlower;
 import com.sergey.prykhodko.model.stock.Stock;
+import com.sergey.prykhodko.model.stock.stock_exceptions.ItemNotStoredToStockException;
 import com.sergey.prykhodko.model.stock.stock_exceptions.StokNotStoredExeption;
 import com.sergey.prykhodko.model.stock.stock_exceptions.StoredStokNotFoundException;
 
@@ -56,12 +57,39 @@ class StockManager {
     }
 
 
-    void putDecorativeFlowerToStock(DecorativeFlower flower){
+    void putDecorativeFlowerToStock(DecorativeFlower flower) throws ItemNotStoredToStockException {
         stock.storeDecorativeFlower(flower);
+        if (isNotInStock(flower)){
+           throw new ItemNotStoredToStockException("Flower was not added");
+        }
+
     }
 
-    void putWildFlowerToStock(WildFlower flower){
+    private boolean isNotInStock(DecorativeFlower flower) {
+        List<DecorativeFlower> flowers = stock.getDecorativeFlowers();
+        if (flowers.get(flowers.size() - 1).equals(flower)){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    private boolean isNotInStock(WildFlower flower) {
+        List<WildFlower> flowers = stock.getWildFlowers();
+        if (flowers.get(flowers.size() - 1).equals(flower)){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    void putWildFlowerToStock(WildFlower flower) throws ItemNotStoredToStockException {
         stock.storeWildFlower(flower);
+        if (isNotInStock(flower)){
+            throw new ItemNotStoredToStockException("Flower was not added");
+        }
     }
 
 

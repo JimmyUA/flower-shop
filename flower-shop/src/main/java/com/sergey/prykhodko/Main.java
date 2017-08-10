@@ -4,6 +4,7 @@ import com.sergey.prykhodko.controler.MainController;
 import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.flowers.Flower;
 import com.sergey.prykhodko.model.stock.Stock;
+import com.sergey.prykhodko.model.stock.stock_exceptions.ItemNotStoredToStockException;
 import com.sergey.prykhodko.model.stock.stock_exceptions.StokNotStoredExeption;
 import com.sergey.prykhodko.model.stock.stock_exceptions.StoredStokNotFoundException;
 
@@ -65,9 +66,11 @@ public class Main
 
                 case "add flowers":
                     try{
-                    mainController.addFlowersToStock(in);
+                        mainController.addFlowersToStock(in);
                     }catch (IllegalArgumentException e){
                         mainController.notifyIlligalArgument(e.getMessage());
+                    } catch (ItemNotStoredToStockException e) {
+                        mainController.notifyItemNotStored(e.getMessage());
                     }
                     break;
 

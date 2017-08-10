@@ -4,6 +4,7 @@ import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.accessories.*;
 import com.sergey.prykhodko.model.products.flowers.*;
 import com.sergey.prykhodko.model.stock.Stock;
+import com.sergey.prykhodko.model.stock.stock_exceptions.ItemNotStoredToStockException;
 import com.sergey.prykhodko.model.stock.stock_exceptions.StokNotStoredExeption;
 import com.sergey.prykhodko.model.stock.stock_exceptions.StoredStokNotFoundException;
 
@@ -78,7 +79,7 @@ public class MainController {
      *******************************FLOWER ADDING METHODS*********************
      *************************************************************************/
 
-    public void addFlowersToStock(Scanner scanner) throws IllegalArgumentException{
+    public void addFlowersToStock(Scanner scanner) throws IllegalArgumentException, ItemNotStoredToStockException {
         do {
             consolePrinter.askFlowerClass();
             String requiredFlowerClass = scanner.nextLine();
@@ -89,25 +90,39 @@ public class MainController {
         }while (true);
     }
 
-    private void choseFlowerFactoryType(String requiredFlowerClass, Scanner scanner) {
+    private void choseFlowerFactoryType(String requiredFlowerClass, Scanner scanner) throws ItemNotStoredToStockException {
         FlowerFactory flowerFactory;
         Flower flower;
         switch (requiredFlowerClass.toLowerCase()){
             case "wild":
-                flowerFactory = new WildFlowerFactory();
-                flower = choseWildFlowerType(flowerFactory, scanner);
-                stockManager.putWildFlowerToStock((WildFlower) flower);
+                flower = createAndStoreToStockWildWlower(scanner);
                 break;
             case "decorative":
-                flowerFactory = new DecorativeFlowerFactory();
-                flower = choseDecorativelowerType(flowerFactory, scanner);
-                stockManager.putDecorativeFlowerToStock((DecorativeFlower) flower);
+                flower = createAndStoreToStockDecorativeFlower(scanner);
                 break;
                 default:
                     consolePrinter.printNoSuchClassExist();
                     return;
         }
         consolePrinter.notifySavingFlowerToStock(flower);
+    }
+
+    private Flower createAndStoreToStockDecorativeFlower(Scanner scanner) throws ItemNotStoredToStockException {
+        FlowerFactory flowerFactory;
+        Flower flower;
+        flowerFactory = new DecorativeFlowerFactory();
+        flower = choseDecorativelowerType(flowerFactory, scanner);
+        stockManager.putDecorativeFlowerToStock((DecorativeFlower) flower);
+        return flower;
+    }
+
+    private Flower createAndStoreToStockWildWlower(Scanner scanner) throws ItemNotStoredToStockException {
+        FlowerFactory flowerFactory;
+        Flower flower;
+        flowerFactory = new WildFlowerFactory();
+        flower = choseWildFlowerType(flowerFactory, scanner);
+        stockManager.putWildFlowerToStock((WildFlower) flower);
+        return flower;
     }
 
     private WildFlower choseWildFlowerType(FlowerFactory factory, Scanner scanner) {
@@ -289,4 +304,7 @@ public class MainController {
     }
 
 
+    public void notifyItemNotStored(String message) {
+        consolePrinter.showMessage(message);
+    }
 }
