@@ -9,4 +9,11 @@ public class StockException extends Exception{
         super(message);
     }
 
+    public StockException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public StockException(Throwable cause) {
+        super(cause);
+    }
 }
