@@ -4,6 +4,8 @@ import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.accessories.*;
 import com.sergey.prykhodko.model.products.flowers.*;
 import com.sergey.prykhodko.model.stock.Stock;
+import com.sergey.prykhodko.model.stock.stock_exceptions.StokNotStoredExeption;
+import com.sergey.prykhodko.model.stock.stock_exceptions.StoredStokNotFoundException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class MainController {
     private ConsolePrinter consolePrinter;
     private BouquetManager bouquetManager;
 
-    public MainController() throws FileNotFoundException {
+    public MainController() throws StoredStokNotFoundException {
         StockFeatFileWorker stockFeatFileWorker = new StockFeatFileWorker();
         stockManager = new StockManager(stockFeatFileWorker);
         consolePrinter = new ConsolePrinter();
@@ -35,7 +37,7 @@ public class MainController {
     /*************************************************************************
      *************************WORK WITH STOCK MANAGER*************************
      *************************************************************************/
-    public void saveStockToFile() throws IOException {
+    public void saveStockToFile() throws StokNotStoredExeption {
         stockManager.storeStock();
     }
 

@@ -4,6 +4,8 @@ import com.sergey.prykhodko.controler.MainController;
 import com.sergey.prykhodko.model.products.Bouquet;
 import com.sergey.prykhodko.model.products.flowers.Flower;
 import com.sergey.prykhodko.model.stock.Stock;
+import com.sergey.prykhodko.model.stock.stock_exceptions.StokNotStoredExeption;
+import com.sergey.prykhodko.model.stock.stock_exceptions.StoredStokNotFoundException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,8 +24,9 @@ public class Main
 
         try {
             mainController = new MainController();
-        } catch (FileNotFoundException e) {
-            System.out.println("Can't find stored stock, programm will be continued with empty stock");
+        } catch (StoredStokNotFoundException e) {
+            System.out.println(e.getMessage() + " reason: " + e.getCause().getMessage());
+            System.out.println("programm will be continued with empty stock");
             mainController = new MainController(new Stock());
         }
 
@@ -34,8 +37,8 @@ public class Main
 
         try {
             mainController.saveStockToFile();
-        } catch (IOException e) {
-            System.out.println("Can't save changes!");
+        } catch (StokNotStoredExeption e) {
+            System.out.println(e.getMessage() + " reason: " + e.getCause().getMessage());
             return;
         }
 

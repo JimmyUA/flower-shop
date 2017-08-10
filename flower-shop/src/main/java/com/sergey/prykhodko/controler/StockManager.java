@@ -5,12 +5,12 @@ import com.sergey.prykhodko.model.products.flowers.DecorativeFlower;
 import com.sergey.prykhodko.model.products.flowers.Flower;
 import com.sergey.prykhodko.model.products.flowers.WildFlower;
 import com.sergey.prykhodko.model.stock.Stock;
+import com.sergey.prykhodko.model.stock.stock_exceptions.StokNotStoredExeption;
+import com.sergey.prykhodko.model.stock.stock_exceptions.StoredStokNotFoundException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +20,15 @@ class StockManager {
     private File stockStorage;
 
 
-    StockManager(StockFeatFileWorker worker) throws FileNotFoundException {
+    StockManager(StockFeatFileWorker worker) throws StoredStokNotFoundException {
         this.worker = worker;
         String fileName = "stock.xml";
         stockStorage = new File(fileName);
-        recreateStoredStock();
+        try {
+            recreateStoredStock();
+        } catch (FileNotFoundException e) {
+            throw new StoredStokNotFoundException("Stored stok was not found", e);
+        }
     }
 
     // this constructor is used in case first one have thrown exception
@@ -38,8 +42,12 @@ class StockManager {
         stock = new Stock();
     }
 
-    void storeStock() throws IOException {
-        worker.storeStockToFile(stock, stockStorage);
+    void storeStock() throws StokNotStoredExeption {
+        try {
+            worker.storeStockToFile(stock, stockStorage);
+        } catch (IOException e) {
+            throw new StokNotStoredExeption("Stock was not stored", e);
+        }
     }
 
     void recreateStoredStock() throws FileNotFoundException {

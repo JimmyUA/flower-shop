@@ -1,6 +1,8 @@
 package com.sergey.prykhodko.controler;
 
 import com.sergey.prykhodko.model.stock.Stock;
+import com.sergey.prykhodko.model.stock.stock_exceptions.StokNotStoredExeption;
+import com.sergey.prykhodko.model.stock.stock_exceptions.StoredStokNotFoundException;
 import org.junit.Test;
 
 import java.io.File;
@@ -14,7 +16,7 @@ public class StockManagerTest {
     StockFeatFileWorker workerMock = mock(StockFeatFileWorker.class);
     StockManager stockManager = new StockManager(workerMock);
 
-    public StockManagerTest() throws FileNotFoundException {
+    public StockManagerTest() throws StoredStokNotFoundException {
     }
 
 
@@ -23,7 +25,7 @@ public class StockManagerTest {
         stockManager.stock = new Stock();
         try {
             stockManager.storeStock();
-        } catch (java.io.IOException e) {
+        } catch (StokNotStoredExeption e) {
             e.printStackTrace();
         }
 

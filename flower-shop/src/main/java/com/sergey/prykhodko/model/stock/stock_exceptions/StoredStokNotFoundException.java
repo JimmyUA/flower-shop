@@ -1,19 +1,19 @@
 package com.sergey.prykhodko.model.stock.stock_exceptions;
 
-public class StokNotFoundException extends StockException {
+public class StoredStokNotFoundException extends StockException {
 
-    public StokNotFoundException() {
+    public StoredStokNotFoundException() {
     }
 
-    public StokNotFoundException(String message) {
+    public StoredStokNotFoundException(String message) {
         super(message);
     }
 
-    public StokNotFoundException(String message, Throwable cause) {
+    public StoredStokNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public StokNotFoundException(Throwable cause) {
+    public StoredStokNotFoundException(Throwable cause) {
         super(cause);
     }
 }
